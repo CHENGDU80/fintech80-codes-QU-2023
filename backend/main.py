@@ -1,5 +1,7 @@
 import json
+import os
 import semantic_kernel as sk
+import traceback
 from semantic_kernel.connectors.ai.open_ai import OpenAIChatCompletion
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
 from fastapi import FastAPI, Body, Request
@@ -9,6 +11,7 @@ from typing import Any, List, Optional
 import logging
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -69,67 +72,86 @@ def analysze_news(news_list, Events_list):
     news_summary_function = NewsAnalysisSkill["EventNewsSummary"]
     news_extend_summary_function = NewsAnalysisSkill["EventsNewsSummaryExtend"]
     news_properties_function = NewsAnalysisSkill["EventProperties"]
+    event_risk_opp_prediction_function = NewsAnalysisSkill["EventRiskOpportunity"]
 
     context = kernel.create_new_context()
 
     Events_dict = {}
 
-    context["Events"] = Events_list
+    context["Events"] = json.dumps(Events_list)
+    try:
 
-    for i in range(len(news_list)):
+        for i in range(len(news_list)):
+            news = str(news_list[i]) #["articles"]["results"]
 
-        news = str(news_list[i]) #["articles"]["results"]
+            context["News"] = news
 
-        print(f"News: {news}")
+            news_classification = news_classifier_function(context=context)
+            event = news_classification.variables.input
+            # Show the response
+            logger.info(f"Event: {news_classification}")
+            
+            news_properties = news_properties_function(context=context)
+            properties = json.loads(news_properties.variables.input)
+            logger.info(f"Properties: {news_properties}")    
 
-        context["News"] = news
-
-        news_classification = news_classifier_function(context=context)
-        event = news_classification.variables.input
-        # Show the response
-        logger.info(f"Event: {news_classification}")
-        
-        news_properties = news_properties_function(context=context)
-        properties = json.loads(news_properties.variables.input)
-        logger.info(f"Properties: {news_properties}")
-        
-
-        if "ErrorCodes.ServiceError" in event:
-            logger.info("Error: ", event)
-        else:
-            # Append the new interaction to the chat history
-            context["Events"] += f"- {event}\n"
-
-            if event in Events_dict:
-                Events_dict[event]["News"].append(news)
-                for prop in properties:
-                    if prop not in Events_dict[event]["Properties"]:
-                        Events_dict[event]["Properties"].append(prop)
-                    else:
-                        pass
+            if "ErrorCodes.ServiceError" in event:
+                logger.info("Error: ", event)
             else:
-                Events_dict.update({event: {"News": [news], "Properties": properties}})
+                # Append the new interaction to the chat history
+                Events_list.append(event)
+                context["Events"] = json.dumps(Events_list)
 
-            if "Summary" in Events_dict[event]:
-                context["Old_Summary"] = Events_dict[event]["Summary"]
-                context["New_Event_News_List"] = news
-                Events_dict[event]["Summary"] = news_extend_summary_function(
-                    context=context
-                ).variables.input
+                if event in Events_dict:
+                    
+                    Events_dict[event]["News"].append(news)
 
-            else:
-                context["Event_News_List"] = news
-                Events_dict[event]["Summary"] = news_summary_function(
-                    context=context
-                ).variables.input
+                    # Adding new properties related to an event
+                    Events_dict[event]["Properties"].update(properties)
 
-    return Events_dict, context["Events"]
+                else:
+                    Events_dict.update({event: {"News": [news], "Properties": properties}})
+
+                if "Summary" in Events_dict[event]:
+
+                    # Updating a summary of a known event with new news
+                    context["Old_Summary"] = Events_dict[event]["Summary"]
+                    context["New_Event_News"] = news
+                    Events_dict[event]["Summary"] = news_extend_summary_function(
+                        context=context
+                    ).variables.input
+
+                else:
+                    # Generating a summary of a new event
+                    context["Event_News"] = news
+                    Events_dict[event]["Summary"] = news_summary_function(
+                        context=context
+                    ).variables.input
+
+                #Predicting Risk and Opportunity
+                context["Event_Summary"] = Events_dict[event]["Summary"]
+                context["Event_News_List"] = str(Events_dict[event]["News"][-1])
+                context["Properties"] = str(Events_dict[event]["Properties"])
+
+                risk_opp_properties = event_risk_opp_prediction_function(context = context)
+
+                logger.info("Risk vs Opportunity:", risk_opp_properties.variables.input)
+                Events_dict[event]["Properties"] = json.loads(risk_opp_properties.variables.input)
+
+    except Exception as e:
+        logger.error(f"An error occurred: {str(e)}")
+        logger.error(traceback.format_exc())
+        # Handling errors and sending an error response
+        return JSONResponse(content={"status": "error", "message": str(e)}, status_code=500)
+
+    return Events_dict, Events_list
+
 
 # %% 
 
 @app.post("/process-news")
 async def process_news(request: Request):
-    Events_list= ''
+    Events_list= []
     raw_data = await request.body()
     logger.info(f"Received data:")
     if raw_data:
@@ -139,21 +161,15 @@ async def process_news(request: Request):
             
             # Convert string to Python dictionary or list
             news_list = json.loads(data_str)
-            logger.info(news_list)
-            logger.info("yes")
+            # logger.info(news_list)
+            # logger.info("yes")
             # Triggering the function
             analyzed_news_dict, Events_list = analysze_news(news_list['newsData'], Events_list)
 
             now = datetime.now()
-            
-            json_results_path = ''
-            
-            # Saving the results to a JSON file
-            with open(f'{json_results_path}/analyzed_news_{now.strftime("%H-%M-%S_%d-%m-%Y")}.json', 'w') as f:
-                json.dump(analyzed_news_dict, f)
 
             # Sending a success response
-            return JSONResponse(content={"status": "success", "message": "Data processed successfully"}, status_code=200)
+            return JSONResponse(content=analyzed_news_dict, status_code=200)
     
         except Exception as e:
             # Handling errors and sending an error response

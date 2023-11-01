@@ -7,7 +7,9 @@ const NewsPage = () => {
   return (
     <div>
         <NavBar />
-        <News/>
+        <div className="main-content"> {/* Apply the main-content class here */}
+            <News/>
+        </div>
     </div>
   );
 };

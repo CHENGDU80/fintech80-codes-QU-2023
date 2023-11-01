@@ -53,3 +53,7 @@
   color: #668810; /* Or any other color for hover state */
 }
 
+.main-content {
+  margin-top: 80px; /* Adjust this value based on the actual height of your navbar */
+}
+

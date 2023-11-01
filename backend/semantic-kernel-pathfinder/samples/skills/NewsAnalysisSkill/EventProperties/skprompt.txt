@@ -17,5 +17,5 @@ For region select the where the events of the news happened.
 [NEWS PIECE]
 
 [OUTPUT FORM]
-Return the selected topics in a list as follows: ["x","y","z"]
+Return the selected topics in a dictionary as follows: {"GDP Growth":"","Canada":"","Fiscal Policy":""}
 

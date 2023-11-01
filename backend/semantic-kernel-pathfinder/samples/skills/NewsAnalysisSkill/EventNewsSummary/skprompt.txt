@@ -7,6 +7,12 @@ MAXIMIZE DETAIL, MEANING
 FOCUS ON THE CONTENT
 LIMIT TO ONE SENTENCE PER NEWS PIECE
 
+[SUMMARIZATION SPECIAL RULE]
+
+If the news mentions anything related to prime commodities 
+like oil or gold or securities and assests like stocks and bonds and realestate, 
+please include it in the summary.
+
 
 [BANNED PHRASES]
 These articles
@@ -17,5 +23,5 @@ These materials
 
 
 Summarize this:
-{{$Event_News_List}}
+{{$Event_News}}
 +++++

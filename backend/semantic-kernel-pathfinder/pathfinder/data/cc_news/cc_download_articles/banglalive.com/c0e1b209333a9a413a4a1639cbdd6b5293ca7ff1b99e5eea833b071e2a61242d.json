@@ -1,0 +1,21 @@
+{
+    "authors": [
+        "ব",
+        "ল ল ইভ",
+        "অর প ত"
+    ],
+    "date_download": "2017-01-02 10:17:35+00:00",
+    "date_modify": null,
+    "date_publish": "2017-01-02 14:23:27",
+    "description": "The Kill Marry Hookup sequence on Koffee With Karan rapid fire round always puts the celebs in a tongue-tied situation.",
+    "filename": "http%3A%2F%2Fbanglalive.com%2Fshahid-wants-to-kill-priyanka-marry-sonakshi-and-hook-up-with-alia%2F.json",
+    "image_url": "http://blcdn-307f.kxcdn.com/wp-content/uploads/2017/01/shahid-new.jpg",
+    "language": "en",
+    "localpath": null,
+    "maintext": "০ = 0, ১ = 1, ২ = 2, ৩ = 3, ৪ = 4, ৫ = 5, ৬ = 6, ৭ = 7, ৮ = 8, ৯ = 9\n্ = See example (Hasant/Viram) ় = * (Nukta) ʼ = ' (Urdhacomma) ঽ = & (Avagrah) ৺ = ~ (Isshar) ৹ = a~ (Bengali ana sign) ৲ = Rs~ (Bengali Rupee sign) ৳ = T~ (Taka sign) । = | (Devanagari danda) ॥ = || (Devanagari double danda) ₹ = Rs (Indian Rupee sign) 卐 = +~ (Swastika sign) Zero Width Joiner = ^ Zero Width Non Joiner = ^^\nThese symbols will type Bengali characters first but if \"~\" will be followed, it will remove previously typed Bengali character and then type the symbol.\nSymbols & ~ * : ^ | ' have special meaning. You can type this way & = &~ ~ = ~~ * = *~ : = :~ ^ = ^~ | = |~ ' = '~\nThe English symbols [ ] { } ( ) < > - + / = ; . , \" ? ! % \\ _ $ @ # translate into the same symbols.\nExample নমস্কার can be written by typing \"namaskaar\"\nAs per Rule # 3, ligature will be rendered. ZWJ and ZWNJ characters are used to produce alternate rendering of ligature.\nA consonant followed by ZWJ character will produce half-formed consonant character.\nExample\nপ্রশ্ন = prashn\nপ্রশ্‍ন = prash^n\nA consonant followed by ZWNJ character will produce dead consonant character.\nExample\nপ্রশ্ন = prashn\nপ্রশ্‌ন = prash^^n\nIf two english characters are making one Bengali Vowel (i.e. ai, au), then\nZWJ character is used to separate them into two different vowels. It will not\nadd ZWJ character but only considered as the separator between two\nvowels.",
+    "source_domain": "banglalive.com",
+    "title": "প্রাক্তন প্রেমিকা প্রিয়াঙ্কাকে মেরে ফেলতে চান শাহিদ!!",
+    "title_page": null,
+    "title_rss": null,
+    "url": "http://banglalive.com/shahid-wants-to-kill-priyanka-marry-sonakshi-and-hook-up-with-alia/"
+}

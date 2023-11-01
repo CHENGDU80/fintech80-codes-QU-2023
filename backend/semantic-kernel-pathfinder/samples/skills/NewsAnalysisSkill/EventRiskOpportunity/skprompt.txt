@@ -1,0 +1,59 @@
+[Market Impact Prediction: Risk and Opportunity Analysis]
+In this task, play the role of a expert financial analyst,
+you are required to analyze and predict the potential market impact 
+of a given event on a specific set of category of securities or commodities 
+or economic sectors or regions, referred to as "property". 
+The objective is to determine whether the event presents an opportunity, 
+risk, or neutral stance for each of the mentioned property.
+
+[Categories]
+- **Opportunity**: The event is likely to have a significantly positive impact.
+- **Minor Opportunity**: The event may have a slightly positive impact.
+- **Neutral**: The event is unlikely to have any significant impact.
+- **Minor Risk**: The event may have a slightly negative impact.
+- **Risk**: The event is likely to have a significantly negative impact.
+
+[Response Format]
+Your response should be in the following JSON format:
+
+{"Property": "category"}
+
+
+[Example1]
+"Event": "The bill would lower the asset threshold for banks to qualify for added oversight, which was raised to $250 billion in a 2018 Republican deregulation bill.",
+"properties": ["United States"]
++++++++++ "output":
+{"United States": "neutral", "Banks": "minor risk"}
+
+[Example2]
+"Event": "Twitter could be making big changes to their terms of service regarding adult content --and how to monetize it.",
+"properties": ["Twitter"]
++++++++++ "output":
+{"Twitter": "minor risk"}
+
+[Example3]
+"Event": "Roku Inc. shares sank 16% in after-hours trading Wednesday after the streaming company topped expectations with its latest results but gave a weaker-than-anticipated outlook for the holiday quarter as economic conditions could further \"degrade advertising budgets.\" ...",
+"properties": ["Roku Inc."]
++++++++++ "output":
+{"Roku Inc.": "minor risk"}
+
+[Example4]
+"Event": "TSX: LUC ) ( BSE: LUC ) ( Nasdaq Stockholm: LUC ) Lucara Diamond Corp. ( \"Lucara\" or the \"Company\" ) today reports its results for the quarter ended September 30, 2022 . Please view PDF version . ( 1 ) See \"Non-IFRS Financial Performance Measures\"",
+"properties": ["TSX: LUC"]
++++++++++ "output":
+{"TSX: LUC": "opportunity"}
+
+[Example5]
+"Event": "RADNOR, Pa., April  17, 2022   ( GLOBE NEWSWIRE )  -- The law firm of Kessler Topaz Meltzer & Check, LLP  ( www.ktmc.com )  informs investors that a securities class action lawsuit has been filed in the United States District Court for the District of Colorado against Gatos Silver, Inc.  ( \"Gatos\" )",
+"properties": ["Gatos Silver, Inc."]
++++++++++ "output":
+{"Gatos Silver, Inc.": "risk"}
+
+[INPUT]
+Event: {{$Event_Summary}}
+
+Event related news: {{$Event_News_List}}
+
+Properties: {{$Properties}}
++++++++++ "output":
+

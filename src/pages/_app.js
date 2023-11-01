@@ -14,9 +14,6 @@ import '../components/NavBar.css';
 import '../components/HeroSection.css';
 import '../components/aboutUs.css';
 import '../components/style.css';
-import '../components/eventSideBar.css';
-import './eventPass.js';
-import '../components/eventSession.css';
 
 const clientSideEmotionCache = createEmotionCache();
 

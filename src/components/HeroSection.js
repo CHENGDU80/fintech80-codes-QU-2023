@@ -14,14 +14,14 @@ const HeroSection = () => {
                 <button>Get Started</button>
                  </Link> {/* Close Link component */}
             </div>
-            <img src="/images/entrepreneur.jpg" alt="Descriptive alt text" className="herosection-gif"/>
+            <img src="/investment-money.gif" alt="Descriptive alt text" className="herosection-gif"/>
         </section>
         <section className="section2">
-            <img src="/images/money.jpg" alt="Descriptive alt text" className="herosection-gif"/>
+            <img src="/images/wsHome.gif" alt="Descriptive alt text" className="herosection-gif"/>
             <div className="text-section">
                 
-                <h1 class="h1-hero-section">Time is Money</h1>
-                <p class="p-hero-section">Missing out on key news can result in significant losses or missed opportunities.</p>
+                <h1 class="h1-hero-section">Discover PathFinder, Your News Intelligence Companion</h1>
+                <p class="p-hero-section">Start investing with Fintech80 with AI...and something more</p>
                 <button>Learn More</button>
             </div>
         </section>

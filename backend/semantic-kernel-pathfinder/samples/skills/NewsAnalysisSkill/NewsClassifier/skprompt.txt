@@ -4,7 +4,7 @@ You are tasked with one of two tasks:
 
 Follow the steps below:
 
-Review the News Piece, the content of the news is just after the word 'body' or 'content':
+Review the News Piece, the content of the news is just after the word 'body':
 
 
 [Event Classification Creation Guidelines]

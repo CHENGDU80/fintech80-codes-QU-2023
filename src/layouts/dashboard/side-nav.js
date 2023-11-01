@@ -1,10 +1,11 @@
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { ButtonBase } from '@mui/material';
 import ArrowTopRightOnSquareIcon from '@heroicons/react/24/solid/ArrowTopRightOnSquareIcon';
+import ChevronUpDownIcon from '@heroicons/react/24/solid/ChevronUpDownIcon';
 import {
   Box,
+  Button,
   Divider,
   Drawer,
   Stack,
@@ -12,6 +13,7 @@ import {
   Typography,
   useMediaQuery
 } from '@mui/material';
+import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
 import { items } from './config';
 import { SideNavItem } from './side-nav-item';
@@ -20,6 +22,7 @@ export const SideNav = (props) => {
   const { open, onClose } = props;
   const pathname = usePathname();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
+
   const content = (
     <Scrollbar
       sx={{
@@ -45,17 +48,11 @@ export const SideNav = (props) => {
             href="/"
             sx={{
               display: 'inline-flex',
-              textDecoration: 'none',
-              height: 24,
+              height: 32,
               width: 32
             }}
           >
-           <Typography
-            color="#32302F"
-            variant="h6" 
-          >
-            PathFinder
-          </Typography>
+            <Logo />
           </Box>
           <Box
             sx={{
@@ -69,6 +66,26 @@ export const SideNav = (props) => {
               p: '12px'
             }}
           >
+            <div>
+              <Typography
+                color="inherit"
+                variant="subtitle1"
+              >
+                Devias
+              </Typography>
+              <Typography
+                color="neutral.400"
+                variant="body2"
+              >
+                Production
+              </Typography>
+            </div>
+            <SvgIcon
+              fontSize="small"
+              sx={{ color: 'neutral.500' }}
+            >
+              <ChevronUpDownIcon />
+            </SvgIcon>
           </Box>
         </Box>
         <Divider sx={{ borderColor: 'neutral.700' }} />
@@ -100,7 +117,8 @@ export const SideNav = (props) => {
                   icon={item.icon}
                   key={item.title}
                   path={item.path}
-                  title={item.title}/>
+                  title={item.title}
+                />
               );
             })}
           </Stack>
@@ -113,7 +131,7 @@ export const SideNav = (props) => {
           }}
         >
           <Typography
-            color="neutral.500"
+            color="neutral.100"
             variant="subtitle2"
           >
             Need more features?
@@ -137,10 +155,10 @@ export const SideNav = (props) => {
           >
             <img
               alt="Go to pro"
-              src="images/dollar.png"
+              src="/assets/devias-kit-pro.png"
             />
           </Box>
-          <button
+          <Button
             component="a"
             endIcon={(
               <SvgIcon fontSize="small">
@@ -149,12 +167,12 @@ export const SideNav = (props) => {
             )}
             fullWidth
             href="https://material-kit-pro-react.devias.io/"
-            className="button"
+            sx={{ mt: 2 }}
             target="_blank"
             variant="contained"
           >
             Pro Live Preview
-          </button>
+          </Button>
         </Box>
       </Box>
     </Scrollbar>
@@ -167,7 +185,7 @@ export const SideNav = (props) => {
         open
         PaperProps={{
           sx: {
-            backgroundColor: '#FCF8FC',
+            backgroundColor: 'neutral.800',
             color: 'common.white',
             width: 280
           }
@@ -186,7 +204,7 @@ export const SideNav = (props) => {
       open={open}
       PaperProps={{
         sx: {
-          backgroundColor: '#FCF8FC',
+          backgroundColor: 'neutral.800',
           color: 'common.white',
           width: 280
         }

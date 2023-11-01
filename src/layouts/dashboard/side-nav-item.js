@@ -1,11 +1,9 @@
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import { Box, ButtonBase } from '@mui/material';
-import Typography from '@mui/material/Typography';
-
 
 export const SideNavItem = (props) => {
-  const { active = false, disabled, external, icon, path, title} = props;
+  const { active = false, disabled, external, icon, path, title } = props;
 
   const linkProps = path
     ? external
@@ -34,20 +32,14 @@ export const SideNavItem = (props) => {
           textAlign: 'left',
           width: '100%',
           ...(active && {
-            backgroundColor: '#32302F'
+            backgroundColor: 'rgba(255, 255, 255, 0.04)'
           }),
           '&:hover': {
-            backgroundColor: '#30403F'
+            backgroundColor: 'rgba(255, 255, 255, 0.04)'
           }
         }}
         {...linkProps}
-        >
-          <Typography
-      color="common.white" // 按钮文本颜色
-      variant="body2"
-    >
-      Close Nav
-    </Typography>
+      >
         {icon && (
           <Box
             component="span"
@@ -96,5 +88,5 @@ SideNavItem.propTypes = {
   external: PropTypes.bool,
   icon: PropTypes.node,
   path: PropTypes.string,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };

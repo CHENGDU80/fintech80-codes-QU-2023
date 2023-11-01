@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { getLatestNews } from '../services/newsdataAPI';
+import { useRouter } from 'next/router';
 import { Card, CardContent, CardHeader, Collapse, IconButton } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/system';
 
 function NewsList() {
   const [news, setNews] = useState([]);
+  const [newsData, setNewsData] = useState(null);
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState(''); // default query
   const [latestDateTimePub, setLatestDateTimePub] = useState('2023-10-01T00:00:00Z'); // State to keep track of the latest article's publication date
@@ -26,11 +29,11 @@ function NewsList() {
   const handleExpandClick = (index) => {
     setExpanded(expanded === index ? null : index);
   };
-
+//&dateEnd=2023-10-25
   const fetchData = async () => {
     setLoading(true);
   
-    const queryParams = 'https://eventregistry.org/api/v1/article/getArticles?resultType=articles&articlesSortBy=date&articlesCount=10&lang=eng&dateEnd=2023-10-25&apiKey=fedb9704-3268-4f47-b741-efc07c31b326';
+    const queryParams = 'https://eventregistry.org/api/v1/article/getArticles?resultType=articles&articlesSortBy=date&articlesCount=5&lang=eng&apiKey=fedb9704-3268-4f47-b741-efc07c31b326';
   
     const data = await getLatestNews(queryParams);
   
@@ -52,6 +55,12 @@ function NewsList() {
     setLoading(false);
   };
   
+  useEffect(() => {
+    if (news.length > 0) { // or any other condition you deem necessary
+        handleAnalyzeNews();
+    }
+  }, [news]); // This effect will run every time the news state changes
+
   const handleAnalyzeNews = async () => {
     try {
         const response = await fetch('http://localhost:8000/process-news', {
@@ -62,16 +71,30 @@ function NewsList() {
             body: JSON.stringify({ newsData: news })
         });
         const data = await response.json();
-        console.log(data);
+
+        setNewsData(data);  // Set the data in local state or context
+
+        // Store the data in localStorage
+        localStorage.setItem('newsData', JSON.stringify(data));
+
+        // Update the URL without navigating
+        const newUrl = `/output_page?newsData=${encodeURIComponent(JSON.stringify(data))}`;
+        window.history.pushState({}, '', newUrl);
+
     } catch (error) {
         console.error('Error notifying backend:', error);
     }
+};
+
+
+  const handle_go_to_output = () => {
+    router.push('/output_page');
   };
 
   return (
     <div>
-      <h1>Latest News</h1>
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+        <h1 style={{ fontSize: '2em', fontWeight: 'bold', marginRight: '20px' }}>Latest News</h1>
         <input 
           type="text" 
           value={query} 
@@ -93,9 +116,9 @@ function NewsList() {
             },
           }}
         />
-        <button onClick={fetchData}>Search</button>
-        <button onClick={handleAnalyzeNews} disabled={news.length === 0}>
-          Analyze News
+        <button onClick={fetchData} style={{ marginLeft: '10px' }}>Search</button>
+        <button onClick={handle_go_to_output} disabled={news.length === 0}>
+        Analyze News
         </button>
       </div>
       {loading && <div>Loading...</div>}
@@ -111,10 +134,6 @@ function NewsList() {
                 subheader={
                   <>
                     {`Date published: ${item.dateTimePub}`}
-                    <br />
-                    {`Creators: ${item.authors && item.authors.map(author => author.name).join(', ')}`}
-                    <br />
-                    {`Offered Stock: ${item && item.authors.map(author => author.name).join(', ')}`}
                   </>
                 }
                 action={
@@ -136,6 +155,7 @@ function NewsList() {
         )}
     </div>
   );
+
 }
 
 export default React.memo(NewsList);

@@ -7,10 +7,13 @@ const output_page = () => {
   return (
     <div>
         <NavBar/>
-        <LLM_output/>
+        <div className="main-content">
+          <LLM_output/> 
+        </div>
     </div>
   );
 };
+
 
 output_page.getLayout = (page) => (
   <div>
