@@ -1,0 +1,21 @@
+Please select all relevant region, economic sectors or concepts, and/or securities from the list sepecified by the () for the news piece below.
+If none are relevant, then just select "None".
+For region select the where the events of the news happened.
+
+("United States","Canada","UK","Germany","France",
+"China","Japan","Australia","India","Brazil","Russia",
+"Technology","Energy","Healthcare","Financials",
+"Industrials","Materials","Utilities","Real Estate",
+"Gold","Silver","Oil","Natural Gas","Corn","Wheat",
+"Soybeans","Copper","Aluminum","Equities","Bonds",
+"Forex","ETFs","Mutual Funds","GDP Growth","Interest Rates",
+"Inflation","Employment Data","Central Bank Decisions","Fiscal Policy",
+ "None")
+
+[NEWS PIECE]
+{{$News}}
+[NEWS PIECE]
+
+[OUTPUT FORM]
+Return the selected topics in a list as follows: ["x","y","z"]
+

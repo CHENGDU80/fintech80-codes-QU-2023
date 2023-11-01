@@ -1,0 +1,51 @@
+/* impact1.css */
+
+.impact-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex-grow: 1;
+    background-color: #F0F0F0;
+}
+
+.h1-impact {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.p-impact {
+    font-size: 24px;
+    color: #666;
+}
+
+.member-card {
+    width: 250px;
+    height: 300px;
+    margin: 30px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.member-image {
+    width: 240px;
+    height: 250px;
+    border-radius: 15%;
+    object-fit: cover;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.member-name {
+    font-weight: bold;
+}
+
+.member-position {
+    color: #666;
+    margin-bottom: 5px;
+}

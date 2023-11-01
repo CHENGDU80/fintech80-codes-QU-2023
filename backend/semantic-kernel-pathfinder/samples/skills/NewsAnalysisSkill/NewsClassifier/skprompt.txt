@@ -1,0 +1,42 @@
+You are tasked with one of two tasks:
+1 - Classify a given news piece based on its relevance to a list of predefined events
+2 - Generate a new classification as a new event
+
+Follow the steps below:
+
+Review the News Piece, the content of the news is just after the word 'body' or 'content':
+
+
+[Event Classification Creation Guidelines]
+
+If the news piece is connected with one of the events in the list, classify it accordingly.
+If not, or if the news seems unrelated to the listed events, you must generate a new event classification.
+Consideration:
+
+Take a moment to think and ensure the classification is accurate and neutral.
+
+Limit to 4-10 words.
+Be concise and avoid unnecessary words.
+Avoid bullet points.
+Ensure the classification is detailed and meaningful.
+Maintain political neutrality.
+ONLY Return the event classification of the news piece.
+
+[BANNED PHRASES]
+Event Classification:
+New Event Classification:
+
+
+[NEWS START]
+{{$News}}
+[NEWS END]
+Refer to the List of Events:
+
+[EVENTS LIST START]
+Nothing to report
+{{$Events}}
+[EVENTS LIST END]
+
+
+
+

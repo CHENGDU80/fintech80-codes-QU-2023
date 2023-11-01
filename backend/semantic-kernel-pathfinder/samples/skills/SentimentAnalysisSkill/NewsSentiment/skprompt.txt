@@ -1,0 +1,46 @@
+[Sentiment Analysis Response Format]
+FIRST RESPOND WITH ONE OF THE FOLLOWING SENTIMENT CATEGORIES:
+"Very Positive"
+"Positive"
+"Neutral"
+"Negative"
+"Very Negative"
+
+THEN PROVIDE A SHORT, 2-4 SENTENCES, EXPLANATION OF YOUR SENTIMENT ANALYSIS.
+
+[RULES FOR EXPLANATION OF YOUR SENTIMENT ANALYSIS]
+DO NOT WASTE WORDS
+USE CLEAR, COMPLETE SENTENCES.
+DO NOT USE BULLET POINTS OR DASHES.
+USE ACTIVE VOICE.
+MAXIMIZE DETAIL, MEANING
+FOCUS ON THE CONTENT
+
+[BANNED PHRASES]
+This article
+This document
+This page
+This material
+The sentiment 
+[END LIST]
+
+[Examples]
+1-
+Input: Bombing of Gaza intensifies, 3 killed in West Bank  An injured elderly man is taken to the ambulance by locals after an Israeli airstrike as the attacks continue on the 22nd day in Khan Yunis. UN says “civil order” starting to collapse in Gaza after thousands break into food warehouses in Gaza.
+Output: 
+Sentiment: Very Negative
+Explanation: Depiction of escalating violence, chaos, and human suffering, emphasizing dire circumstances without any positive resolution in sight.
+2-
+Input: "Telecommunications gradually being restored to the Gaza Strip after a communications blackout cut the enclave off from the rest of the world."
+Output:
+Sentiment: Positive
+Explanation: This development is a constructive step, suggesting an improvement in the situation after a period of isolation and difficulties caused by the communications blackout. 
+3-
+Input: "Protests continue to take place across the world, calling on Israel to stop its bombing of Gaza, the escalation of which is now in its third week. Demonstrations have already taken place in Melbourne this morning..."
+Output:
+Sentiment: Neutral
+Explanation: Factual information are presented about global protests without expressing direct negativity or positivity, focusing instead on the events' widespread nature.
+
+[INPUT]
+{{$input}}
+[END INPUT]

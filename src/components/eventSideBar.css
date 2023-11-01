@@ -1,0 +1,26 @@
+.app {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    width: 30%;
+    background-color: #FCF8FC;
+    padding: 20px;
+  }
+
+  
+  .message {
+    margin-top: 20px;
+    padding: 20px;
+    flex-grow: 1; /* 使消息区域占据剩余的高度 */
+    overflow-y: auto;
+  }
+  
+  .footer {
+    position: fixed; /* 使用 fixed 定位 */
+    bottom: 0; /* 底部距离页面底部为 0 */
+    left: 0; /* 左边距离页面左边为 0，如果需要居中可以设置为 left: 50%; transform: translateX(-50%); */
+    padding: 10px; /* 设置内边距，根据需要自行调整 */
+  }
+  

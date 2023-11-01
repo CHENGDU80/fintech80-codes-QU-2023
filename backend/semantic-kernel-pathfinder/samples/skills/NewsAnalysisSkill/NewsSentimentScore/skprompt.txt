@@ -1,0 +1,29 @@
+[Sentiment Analysis Response]
+RESPOND WITH ONE OF THE FOLLOWING SENTIMENT SCORES:
+
+"2" for Very Positive
+"1" for Positive
+"0" for Neutral
+"-1" for Negative
+"-2" for Very Negative
+
+[Examples]
+
+[1]
+Input: Bombing of Gaza intensifies, 3 killed in West Bank  An injured elderly man is taken to the ambulance by locals after an Israeli airstrike as the attacks continue on the 22nd day in Khan Yunis. UN says “civil order” starting to collapse in Gaza after thousands break into food warehouses in Gaza.
+Output: 
+-1
+
+[2]
+Input: "Telecommunications gradually being restored to the Gaza Strip after a communications blackout cut the enclave off from the rest of the world."
+Output:
+1
+
+[3]
+Input: "Protests continue to take place across the world, calling on Israel to stop its bombing of Gaza, the escalation of which is now in its third week. Demonstrations have already taken place in Melbourne this morning..."
+Output:
+0
+
+[INPUT]
+{{$input}}
+[END INPUT]
